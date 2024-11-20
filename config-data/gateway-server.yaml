@@ -38,4 +38,8 @@ spring:
           uri: lb://CATALOGOSV/
           predicates:
             - Path=/catalogosv/**
+        - id: REPORTES
+          uri: lb://REPORTES/
+          predicates:
+            - Path=/reportes/**
    

@@ -13,8 +13,8 @@ import lombok.Data;
 @Data
 public class TiposEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "modelos_sequence")
-	@SequenceGenerator(name = "modelos_sequence", sequenceName = "modelos_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipos_sequence")
+	@SequenceGenerator(name = "tipos_sequence", sequenceName = "tipos_sequence", allocationSize = 1)
 	private long id;
 	private String tipo;
 }
