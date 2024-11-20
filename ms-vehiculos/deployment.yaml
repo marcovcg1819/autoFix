@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehiculos-server-deployment
+  labels:
+    app: vehiculos-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: vehiculos-server-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehiculos-server-deployment
+    spec:
+      containers:
+        - name: vehiculos-server
+          image: marcovcg1819/vehiculos-server:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8087
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehiculos-server-service
+  labels:
+    app: vehiculos-server-service
+spec:
+  selector:
+    app: vehiculos-server-deployment
+  ports:
+    - protocol: TCP
+      port: 8087
+      targetPort: 8087
+  type: LoadBalancer

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reportes-server-deployment
+  labels:
+    app: reportes-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: reportes-server-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reportes-server-deployment
+    spec:
+      containers:
+        - name: reportes-server
+          image: marcovcg1819/reportes-server:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8089
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reportes-server-service
+  labels:
+    app: reportes-server-service
+spec:
+  selector:
+    app: reportes-server-deployment
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+  type: LoadBalancer

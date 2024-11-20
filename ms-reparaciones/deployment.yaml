@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reparaciones-server-deployment
+  labels:
+    app: reparaciones-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: reparaciones-server-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reparaciones-server-deployment
+    spec:
+      containers:
+        - name: reparaciones-server
+          image: marcovcg1819/reparaciones-server:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8086
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reparaciones-server-service
+  labels:
+    app: reparaciones-server-service
+spec:
+  selector:
+    app: reparaciones-server-deployment
+  ports:
+    - protocol: TCP
+      port: 8086
+      targetPort: 8086
+  type: LoadBalancer

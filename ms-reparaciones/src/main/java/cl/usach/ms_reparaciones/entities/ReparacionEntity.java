@@ -1,6 +1,15 @@
 package cl.usach.ms_reparaciones.entities;
 
-import jakarta.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,21 +21,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReparacionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reparacion_sequence")
+	@SequenceGenerator(name = "reparacion_sequence", sequenceName = "reparacion_sequence",  allocationSize=1)
+    private Long id;
 
-    private String n_patente;
-    private String fecha_ing;
-    private String hora_ing;
-    private Boolean bono;
-    private Float monto_total_tiporep;
-    private Float recargo;
-    private Float descuento;
-    private Float iva;
-    private Float costo_total;
-    private String fecha_sal;
-    private String hora_sal;
-    private String fecha_sal_cli;
-    private String hora_sal_cli;
+    private Date fecha_ingreso;
+    private Time hora_ingreso;
+    private Float monto_total_reparaciones;
+    private Float monto_total_recargos;
+    private Float monto_iva;
+    private Float total;
+    private Date fecha_salida;
+    private Time hora_salida;
+    private Date fecha_entrega_cliente;
+    private Time hora_entrega_cliente;
 }

@@ -1,52 +1,56 @@
 package cl.usach.ms_vehiculos.services;
 
 
-import cl.usach.ms_vehiculos.entities.VehiculoEntity;
-import cl.usach.ms_vehiculos.repositories.VehiculoRepository;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import cl.usach.ms_vehiculos.entities.VehiculoEntity;
+import cl.usach.ms_vehiculos.modelos.ResponseListVeviculos;
+import cl.usach.ms_vehiculos.repositories.VehiculoRepository;
 
 @Service
 public class VehiculoService {
 
-    @Autowired
-    VehiculoRepository vehiculoRepository;
-
-    public List<VehiculoEntity> getAll() {
-        return vehiculoRepository.findAll();
-    }
-
-    public VehiculoEntity getVehiculoById(String id) {
-        return vehiculoRepository.findById(id).orElse(null);
-    }
-
-    public VehiculoEntity saveVehiculo(VehiculoEntity vehiculo) {
-        VehiculoEntity vehiculoNew = vehiculoRepository.save(vehiculo);
-        return vehiculoNew;
-    }
-
-    public VehiculoEntity eliminarVehiculoPorId(String patente) {
-        Optional<VehiculoEntity> vehiculo = vehiculoRepository.findById(patente);
-        if (vehiculo.isPresent()) {
-            vehiculoRepository.delete(vehiculo.get());
-            return vehiculo.get();
-        }
-        return null;
-
-    }
-
-
-
-
-    public ArrayList<VehiculoEntity> obtenerVehiculo() {
-        return (ArrayList<VehiculoEntity>) vehiculoRepository.findAll();
-    }
-
-    public VehiculoEntity guardarVehiculo(VehiculoEntity vehiculo) {
-        return vehiculoRepository.save(vehiculo);
-    }
+	@Autowired
+	private VehiculoRepository vehiculoRepository;
+	
+	public Collection<ResponseListVeviculos> getAllVehiculos(){
+		return vehiculoRepository.getVehiculoList();
+	}
+	
+	public ResponseListVeviculos getByPatente(String patente){
+		return vehiculoRepository.getVehiculoByPatente(patente);
+	}
+	
+	public VehiculoEntity getVehiculoById(Long id){
+		return vehiculoRepository.findById(id).get();
+	}
+	
+	public VehiculoEntity saveVehiculo(VehiculoEntity vehiculo){
+		return vehiculoRepository.save(vehiculo);
+	}
+	
+	public VehiculoEntity updateVehiculo(Long id , VehiculoEntity vehiculo){
+		VehiculoEntity veh = vehiculoRepository.findById(id).get();
+		
+		veh.setAnio_fabricacion(vehiculo.getAnio_fabricacion());
+		veh.setId_marca(vehiculo.getId_marca());
+		veh.setId_modelo(vehiculo.getId_modelo());
+		veh.setId_tipo_auto(vehiculo.getId_tipo_auto());
+		veh.setKilometraje(vehiculo.getKilometraje());
+		veh.setN_asientos(vehiculo.getN_asientos());
+		veh.setN_patente(vehiculo.getN_patente());
+		
+		vehiculoRepository.save(veh);
+		return veh;
+	}
+	
+	public String removeVehiculo(Long id){
+		VehiculoEntity v = new VehiculoEntity();
+		v.setId(id);
+		vehiculoRepository.delete(v);
+		return "OK";
+	}
 }
