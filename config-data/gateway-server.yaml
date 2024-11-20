@@ -26,7 +26,8 @@ spring:
           uri: lb://ms-vehiculos
           predicates:
             - Path=/vehiculo/**
-        - id: msreparaciones
-          uri: lb://MSREPARACIONES/
+        - id: REPARACIONES
+          uri: lb://REPARACIONES/
           predicates:
             - Path=/reparacion/**
+   
