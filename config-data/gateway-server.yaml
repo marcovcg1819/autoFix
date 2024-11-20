@@ -30,4 +30,12 @@ spring:
           uri: lb://REPARACIONES/
           predicates:
             - Path=/reparacion/**
+        - id: CATALOGOSR
+          uri: lb://CATALOGOSR/
+          predicates:
+            - Path=/catalogosr/**
+      - id: CATALOGOSV
+          uri: lb://CATALOGOSV/
+          predicates:
+            - Path=/catalogosv/**
    
