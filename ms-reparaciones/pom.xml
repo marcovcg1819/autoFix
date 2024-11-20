@@ -9,7 +9,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cl.usach</groupId>
-	<artifactId>ms-reparaciones</artifactId>
+	<artifactId>REPARACIONES</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ms-reparaciones</name>
 	<description>Demo project for Spring Boot</description>
