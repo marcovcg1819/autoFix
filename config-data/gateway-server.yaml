@@ -34,7 +34,7 @@ spring:
           uri: lb://CATALOGOSR/
           predicates:
             - Path=/catalogosr/**
-      - id: CATALOGOSV
+        - id: CATALOGOSV
           uri: lb://CATALOGOSV/
           predicates:
             - Path=/catalogosv/**
