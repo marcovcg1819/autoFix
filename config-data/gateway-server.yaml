@@ -33,8 +33,8 @@ spring:
           uri: lb://ms-costo
           predicates:
             - Path=/costo/**
-        - id: reparaciones
-          uri: lb://REPARACIONES
+        - id: REPARACIONES
+          uri: lb://REPARACIONES/
           predicates:
             - Path=/reparacion/**
         - id: ms-tipo
